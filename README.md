@@ -2,10 +2,10 @@
 login page with validation.
 
 
-The page consists of two main input fields: Username and Password. The Username field is where users enter their unique identification. The Password field is masked for security purposes, so the typed password isn’t visible.
+- The page consists of two main input fields: Username and Password. The Username field is where users enter their unique identification. The Password field is masked for security purposes, so the typed password isn’t visible.
 
 
-One of the key features of this login page is the password validation. When users enter their password, the system checks it against certain criteria to ensure its strength and validity.For example, it may check if the password includes a combination of uppercase and lowercase letters, numbers, and special characters.
+- One of the key features of this login page is the password validation. When users enter their password, the system checks it against certain criteria to ensure its strength and validity.For example, it may check if the password includes a combination of uppercase and lowercase letters, numbers, and special characters.
 
 
 
