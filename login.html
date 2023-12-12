@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+  /* Additional CSS for design improvements */
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #ececec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .login-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    width: 350px;
+  }
+
+  .login-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 2px solid #d1d1d1;
+    outline: none;
+    background: transparent;
+  }
+
+  .form-group input:focus,
+  .form-group input:valid {
+    border-bottom: 2px solid #9b59b6;
+  }
+
+  .form-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+
+  .form-group input:focus ~ label,
+  .form-group input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #9b59b6;
+    font-size: 12px;
+  }
+
+  .form-group input[type="submit"] {
+    background: #9b59b6;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .form-group input[type="submit"]:hover {
+    background: #8e44ad;
+  }
+
+  .validation-messages {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .validation-messages.valid {
+    color: #5cb85c;
+  }
+  .validation-message {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .validation-message.valid {
+    color: #5cb85c;
+  }
+
+
+  #passwordRequirements {
+    display: none;
+  }
+
+  /* CSS to show validation messages when password field is focused */
+  #password:focus + #passwordRequirements {
+    display: block;
+  }
+
+  
+
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <input type="text" id="username" name="username" required>
+        <label for="username">Username</label>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" required>
+        <label for="password">Password</label>
+        <div id="passwordRequirements">
+          <div id="minChars" class="validation-message">Minimum 8 characters</div>
+          <div id="upperCase" class="validation-message">At least one uppercase letter (A-Z)</div>
+          <div id="lowerCase" class="validation-message">At least one lowercase letter (a-z)</div>
+          <div id="number" class="validation-message">At least one number (0-9)</div>
+          <div id="specialChar" class="validation-message">At least one special character (!@#$%^&*)</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Login">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Real-time password validation
+    document.getElementById('password').addEventListener('input', function() {
+      var password = this.value;
+      var minChars = document.getElementById('minChars');
+      var upperCase = document.getElementById('upperCase');
+      var lowerCase = document.getElementById('lowerCase');
+      var number = document.getElementById('number');
+      var specialChar = document.getElementById('specialChar');
+
+      // Minimum 8 characters
+      if (password.length >= 8) {
+        minChars.classList.add('valid');
+      } else {
+        minChars.classList.remove('valid');
+      }
+
+      // At least one uppercase letter
+      if (password.match(/[A-Z]/)) {
+        upperCase.classList.add('valid');
+      } else {
+        upperCase.classList.remove('valid');
+      }
+
+      // At least one lowercase letter
+      if (password.match(/[a-z]/)) {
+        lowerCase.classList.add('valid');
+      } else {
+        lowerCase.classList.remove('valid');
+      }
+
+      // At least one number
+      if (password.match(/[0-9]/)) {
+        number.classList.add('valid');
+      } else {
+        number.classList.remove('valid');
+      }
+
+      // At least one special character
+      if (password.match(/[!@#$%^&*]/)) {
+        specialChar.classList.add('valid');
+      } else {
+        specialChar.classList.remove('valid');
+      }
+
+
+      
+    });
+
+
+    // JavaScript to hide validation messages when username field is focused
+    document.getElementById('username').addEventListener('focus', function() {
+      document.getElementById('passwordRequirements').style.display = 'none';
+    });
+
+    // JavaScript to show validation messages when password field is focused
+    document.getElementById('password').addEventListener('focus', function() {
+      document.getElementById('passwordRequirements').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
