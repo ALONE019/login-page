@@ -121,12 +121,22 @@
     display: block;
   }
 
+  .login-container img {
+      display: block;
+      margin: 0 auto 20px; /* Center the image and add space below it */
+      width: 100px; /* Set the width of the image */
+      height: 100px; /* Set the height of the image */
+      object-fit: cover; /* Maintain aspect ratio while covering the container */
+      border-radius: 50%; /* Make the image rounded */
+    }
+
   
 
 </style>
 </head>
 <body>
   <div class="login-container">
+    <img src="l1.jpg" alt="Login Image">
     <h2>Login</h2>
     <form id="loginForm">
       <div class="form-group">
@@ -136,6 +146,7 @@
       <div class="form-group">
         <input type="password" id="password" name="password" required>
         <label for="password">Password</label>
+        
         <div id="passwordRequirements">
           <div id="minChars" class="validation-message">Minimum 8 characters</div>
           <div id="upperCase" class="validation-message">At least one uppercase letter (A-Z)</div>
@@ -151,6 +162,46 @@
   </div>
 
   <script>
+
+// Real-time username validation
+document.getElementById('username').addEventListener('keypress', function(event) {
+    var charCode = event.which || event.keyCode;
+    var charStr = String.fromCharCode(charCode);
+
+    // Check if the typed character is a letter
+    if (!/[a-zA-Z]/.test(charStr)) {
+      event.preventDefault(); // Prevent the input if not a letter
+    }
+  });
+
+  // Real-time username validation (additional check for copy-paste)
+  document.getElementById('username').addEventListener('input', function() {
+    var username = this.value;
+    var usernameValidation = document.getElementById('usernameValidation');
+
+    // Only characters are allowed
+    if (/^[a-zA-Z]+$/.test(username)) {
+      usernameValidation.classList.add('valid');
+    } else {
+      usernameValidation.classList.remove('valid');
+    }
+
+    // Remove any non-alphabetic characters from the input
+    this.value = username.replace(/[^a-zA-Z]/g, '');
+  });
+
+  // JavaScript to hide validation messages when username field is focused
+  document.getElementById('username').addEventListener('focus', function() {
+    document.getElementById('passwordRequirements').style.display = 'none';
+  });
+
+  // JavaScript to show validation messages when password field is focused
+  document.getElementById('password').addEventListener('focus', function() {
+    document.getElementById('passwordRequirements').style.display = 'block';
+  });
+
+
+
     // Real-time password validation
     document.getElementById('password').addEventListener('input', function() {
       var password = this.value;
